@@ -45,7 +45,7 @@ void* reader_thread(void* arg) {
         if ((end.tv_sec - start.tv_sec) >= args->duration) break;
 
         // Read from shared memory
-        sum = atomic_load(&shared_mem); // Corrected atomic load
+        sum += atomic_load(&shared_mem); // Corrected atomic load
         //int val = shared_mem;
         args->read_count++;
     }
