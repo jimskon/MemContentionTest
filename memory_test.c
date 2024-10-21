@@ -45,7 +45,7 @@ void* reader_thread(void* arg) {
 
         // Read from shared memory
         //int val = atomic_load(&shared_mem); // Corrected atomic load
-        int vall = shared_mem;
+        int val = shared_mem;
         args->read_count++;
     }
     return NULL;
