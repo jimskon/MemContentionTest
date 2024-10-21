@@ -88,7 +88,7 @@ void run_test(int n_threads, int write_rate, int duration, int with_writer) {
     printf("Results (with_writer = %d):\n", with_writer);
     int total_reads = 0;
     for (int i = 1; i < n_threads; i++) {
-        printf("Reader %d: %l reads\n", i, thread_args[i].read_count);
+        printf("Reader %d: %lld reads\n", i, thread_args[i].read_count);
         total_reads += thread_args[i].read_count;
     }
     printf("Average reads per second: %.2f\n", (double)total_reads / duration);
