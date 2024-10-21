@@ -14,7 +14,7 @@ volatile atomic_int shared_mem = 0;
 // Thread argument structure
 typedef struct {
     int id;
-    int read_count;
+    long long read_count;
     int duration;
     int write_rate;
     int is_writer;
