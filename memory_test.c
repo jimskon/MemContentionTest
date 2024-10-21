@@ -24,7 +24,7 @@ void* writer_thread(void* arg) {
     thread_arg_t* args = (thread_arg_t*)arg;
     int value = 0;
     while (1) {
-        shared_mem.store(value++, memory_order_relaxed);
+        atomic_store(&shared_mem, value++); // Corrected atomic store
         usleep(1000000 / args->write_rate); // Sleep for the given write rate
     }
     return NULL;
@@ -42,7 +42,7 @@ void* reader_thread(void* arg) {
         if ((end.tv_sec - start.tv_sec) >= args->duration) break;
 
         // Read from shared memory
-        int val = shared_mem.load(memory_order_relaxed);
+        int val = atomic_load(&shared_mem); // Corrected atomic load
         args->read_count++;
     }
     return NULL;
