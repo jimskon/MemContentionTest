@@ -8,7 +8,8 @@
 #define BILLION 1000000000L
 
 // Shared memory
-volatile atomic_int shared_mem = 0;
+//volatile atomic_int shared_mem = 0;
+int shared_mem = 0;
 
 // Thread argument structure
 typedef struct {
@@ -24,7 +25,8 @@ void* writer_thread(void* arg) {
     thread_arg_t* args = (thread_arg_t*)arg;
     int value = 0;
     while (1) {
-        atomic_store(&shared_mem, value++); // Corrected atomic store
+        //atomic_store(&shared_mem, value++); // Corrected atomic store
+        shared_mem = value++;
         usleep(1000000 / args->write_rate); // Sleep for the given write rate
     }
     return NULL;
@@ -42,7 +44,8 @@ void* reader_thread(void* arg) {
         if ((end.tv_sec - start.tv_sec) >= args->duration) break;
 
         // Read from shared memory
-        int val = atomic_load(&shared_mem); // Corrected atomic load
+        //int val = atomic_load(&shared_mem); // Corrected atomic load
+        int vall = shared_mem;
         args->read_count++;
     }
     return NULL;
