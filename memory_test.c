@@ -36,6 +36,7 @@ void* writer_thread(void* arg) {
 void* reader_thread(void* arg) {
     thread_arg_t* args = (thread_arg_t*)arg;
     struct timespec start, end;
+    long long sum = 0;
     clock_gettime(CLOCK_MONOTONIC, &start);
 
     while (1) {
@@ -44,10 +45,11 @@ void* reader_thread(void* arg) {
         if ((end.tv_sec - start.tv_sec) >= args->duration) break;
 
         // Read from shared memory
-        int val = atomic_load(&shared_mem); // Corrected atomic load
+        sum = atomic_load(&shared_mem); // Corrected atomic load
         //int val = shared_mem;
         args->read_count++;
     }
+    printf("SUM %s: %lld\n",args.id,sum);
     return NULL;
 }
 
