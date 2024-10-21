@@ -49,7 +49,7 @@ void* reader_thread(void* arg) {
         //int val = shared_mem;
         args->read_count++;
     }
-    printf("SUM %s: %lld\n",args->id,sum);
+    printf("SUM %d: %lld\n",args->id,sum);
     return NULL;
 }
 
