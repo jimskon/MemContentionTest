@@ -25,7 +25,7 @@ void* writer_thread(void* arg) {
     thread_arg_t* args = (thread_arg_t*)arg;
     int value = 0;
     while (1) {
-        atomic_store(&shared_mem, value++); // Corrected atomic store
+        //atomic_store(&shared_mem, value++); // Corrected atomic store
         //shared_mem = value++;
         usleep(1000000 / args->write_rate); // Sleep for the given write rate
     }
@@ -45,11 +45,11 @@ void* reader_thread(void* arg) {
         if ((end.tv_sec - start.tv_sec) >= args->duration) break;
 
         // Read from shared memory
-        sum += atomic_load(&shared_mem); // Corrected atomic load
+        //sum += atomic_load(&shared_mem); // Corrected atomic load
         //int val = shared_mem;
         args->read_count++;
     }
-    printf("SUM %d: %lld\n",args->id,sum);
+    //printf("SUM %d: %lld\n",args->id,sum);
     return NULL;
 }
 
